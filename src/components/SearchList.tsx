@@ -11,13 +11,16 @@ function SearchList({ searchText, searchResult }: Props) {
     const highlight = text
       .replaceAll(searchText, `/g${searchText}/g`)
       .split("/g")
-      .map((el) =>
-        el === searchText ? (
-          <strong className="text-blue">{searchText}</strong>
+      .map((el, idx) => {
+        const num = idx + 1;
+        return el === searchText ? (
+          <strong key={num} className="text-blue">
+            {searchText}
+          </strong>
         ) : (
           el
-        )
-      );
+        );
+      });
     return highlight;
   };
 

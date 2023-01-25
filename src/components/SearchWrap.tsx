@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import SearchInput from "./SearchInput";
 import SearchList from "./SearchList";
 import { SickType } from "../types";
-import { getSickResult } from "../hooks/useSearch";
+import getSickAPI from "../hooks/useSearch";
 
 function SearchWrap() {
   const [searchText, setSearchText] = useState("");
@@ -15,7 +15,7 @@ function SearchWrap() {
   useEffect(() => {
     if (searchText.trim().length === 0) return undefined;
     const debounce = setTimeout(async () => {
-      const data = await getSickResult(searchText);
+      const { data } = await getSickAPI(searchText, 7);
       setSearchResult(data);
     }, 500);
     return () => clearTimeout(debounce);

@@ -1,6 +1,34 @@
 import axios from "axios";
 
-export const getSickResult = async (text: string): Promise<[]> => {
-  const { data } = await axios.get(`http://localhost:4000/sick?q=${text}`);
-  return data;
-};
+const cache = new Map();
+
+async function getSickAPI(input: string, limit?: number) {
+  if (cache.has(input)) {
+    console.info("return cache");
+
+    return cache.get(input);
+  }
+  try {
+    console.info("calling api");
+
+    const response = await axios.get(`http://localhost:4000/sick?q=${input}`, {
+      params: { q: input, _limit: limit },
+    });
+
+    const successResult = { state: "success", data: response.data };
+
+    cache.set(input, successResult);
+
+    return successResult;
+  } catch (e) {
+    if (e instanceof Error) {
+      alert(`통신에 실패했습니다. 다시 시도해주세요: ${e.message}`);
+    }
+
+    const failResult = { state: "fail", data: [] };
+
+    return failResult;
+  }
+}
+
+export default getSickAPI;
