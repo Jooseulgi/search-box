@@ -13,12 +13,11 @@ function SearchWrap() {
   };
 
   useEffect(() => {
-    if (searchText.trim().length === 0) return;
+    if (searchText.trim().length === 0) return undefined;
     const debounce = setTimeout(async () => {
       const data = await getSickResult(searchText);
       setSearchResult(data);
     }, 500);
-    // eslint-disable-next-line consistent-return
     return () => clearTimeout(debounce);
   }, [searchText]);
 

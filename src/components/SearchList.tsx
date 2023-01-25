@@ -7,12 +7,18 @@ interface Props {
   searchResult: SickType[];
 }
 function SearchList({ searchText, searchResult }: Props) {
-  const findSearchText = (text: string) => {
-    const reg = new RegExp(searchText, "g");
-    return text.replace(
-      reg,
-      `<span style="color: #3F51B5; font-weight:bold">${searchText}</span>`
-    );
+  const HighlightText = (text: string) => {
+    const highlight = text
+      .replaceAll(searchText, `/g${searchText}/g`)
+      .split("/g")
+      .map((el) =>
+        el === searchText ? (
+          <strong className="text-blue">{searchText}</strong>
+        ) : (
+          el
+        )
+      );
+    return highlight;
   };
 
   return (
@@ -27,12 +33,7 @@ function SearchList({ searchText, searchResult }: Props) {
               key={sickData.sickCd}
             >
               <AiOutlineSearch className="flex-none text-grayB mr-1" />
-              <span
-                // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{
-                  __html: findSearchText(sickData.sickNm),
-                }}
-              />
+              <span>{HighlightText(sickData.sickNm)}</span>
             </li>
           ))
         ) : (
