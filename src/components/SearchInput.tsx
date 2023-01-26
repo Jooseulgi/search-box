@@ -5,8 +5,14 @@ interface Props {
   searchText: string;
   setSearchText: Dispatch<SetStateAction<string>>;
   handleChangeText: (e: ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
-function SearchInput({ searchText, setSearchText, handleChangeText }: Props) {
+export default function SearchInput({
+  searchText,
+  setSearchText,
+  handleChangeText,
+  onKeyDown,
+}: Props) {
   return (
     <div className="relative mt-10">
       <input
@@ -15,6 +21,7 @@ function SearchInput({ searchText, setSearchText, handleChangeText }: Props) {
         placeholder="질환명을 입력해주세요."
         value={searchText}
         onChange={handleChangeText}
+        onKeyDown={onKeyDown}
       />
       <div>
         {searchText && (
@@ -28,5 +35,3 @@ function SearchInput({ searchText, setSearchText, handleChangeText }: Props) {
     </div>
   );
 }
-
-export default SearchInput;

@@ -3,20 +3,29 @@ import SearchInput from "./SearchInput";
 import SearchList from "./SearchList";
 import { SickType } from "../types";
 import getSickAPI from "../hooks/useSearch";
+import useKeyboard from "../hooks/useKeyboard";
 
-function SearchWrap() {
+export default function SearchWrap() {
   const [searchText, setSearchText] = useState("");
+  const [loading, setLoading] = useState(false);
   const [searchResult, setSearchResult] = useState<SickType[]>([]);
+  const [currentIndex, ulRef, handleKeyPress, setCurrentIndex] = useKeyboard(
+    searchResult.length,
+    setSearchText
+  );
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
+    setCurrentIndex(-1);
   };
 
   useEffect(() => {
     if (searchText.trim().length === 0) return undefined;
+    setLoading(true);
     const debounce = setTimeout(async () => {
       const { data } = await getSickAPI(searchText, 7);
       setSearchResult(data);
+      setLoading(false);
     }, 500);
     return () => clearTimeout(debounce);
   }, [searchText]);
@@ -32,13 +41,18 @@ function SearchWrap() {
           searchText={searchText}
           setSearchText={setSearchText}
           handleChangeText={handleChangeText}
+          onKeyDown={handleKeyPress}
         />
         {searchText && (
-          <SearchList searchText={searchText} searchResult={searchResult} />
+          <SearchList
+            searchText={searchText}
+            searchResult={searchResult}
+            ulRef={ulRef}
+            currentIndex={currentIndex}
+            loading={loading}
+          />
         )}
       </div>
     </div>
   );
 }
-
-export default SearchWrap;
