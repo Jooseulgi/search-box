@@ -1,17 +1,17 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
-import SearchInput from "./SearchInput";
-import SearchList from "./SearchList";
-import { SickType } from "../types";
-import getSickAPI from "../hooks/useSearch";
-import useKeyboard from "../hooks/useKeyboard";
+import { ChangeEvent, useEffect, useState } from 'react';
+import SearchInput from './SearchInput';
+import SearchList from './SearchList';
+import { SickType } from '../types';
+import getSickResults from '../hooks/useSearch';
+import useKeyboard from '../hooks/useKeyboard';
 
 export default function SearchWrap() {
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
   const [loading, setLoading] = useState(false);
   const [searchResult, setSearchResult] = useState<SickType[]>([]);
   const [currentIndex, ulRef, handleKeyPress, setCurrentIndex] = useKeyboard(
     searchResult.length,
-    setSearchText
+    setSearchText,
   );
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +23,7 @@ export default function SearchWrap() {
     if (searchText.trim().length === 0) return undefined;
     setLoading(true);
     const debounce = setTimeout(async () => {
-      const { data } = await getSickAPI(searchText, 7);
+      const { data } = await getSickResults(searchText, 7);
       setSearchResult(data);
       setLoading(false);
     }, 500);

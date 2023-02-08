@@ -1,21 +1,21 @@
-import axios from "axios";
+import axios from 'axios';
 
 const cache = new Map();
 
-async function getSickAPI(input: string, limit?: number) {
+async function getSickResults(input: string, limit?: number) {
   if (cache.has(input)) {
-    console.info("return cache");
+    console.info('return cache');
 
     return cache.get(input);
   }
   try {
-    console.info("calling api");
+    console.info('calling api');
 
     const response = await axios.get(`http://localhost:4000/sick?q=${input}`, {
       params: { q: input, _limit: limit },
     });
 
-    const successResult = { state: "success", data: response.data };
+    const successResult = { state: 'success', data: response.data };
 
     cache.set(input, successResult);
 
@@ -25,10 +25,10 @@ async function getSickAPI(input: string, limit?: number) {
       alert(`통신에 실패했습니다. 다시 시도해주세요: ${e.message}`);
     }
 
-    const failResult = { state: "fail", data: [] };
+    const failResult = { state: 'fail', data: [] };
 
     return failResult;
   }
 }
 
-export default getSickAPI;
+export default getSickResults;
