@@ -1,6 +1,6 @@
-import { AiOutlineSearch } from "react-icons/ai";
-import { SickType } from "../types";
-import Loading from "./Loading";
+import { AiOutlineSearch } from 'react-icons/ai';
+import { SickType } from '../types';
+import Loading from './Loading';
 
 interface Props {
   searchText: string;
@@ -28,7 +28,7 @@ export default function SearchList({
             searchResult.map((sickData, focusIdx) => (
               <li
                 className={`flex items-center my-1 hover:bg-grayE cursor-pointer ${
-                  currentIndex === focusIdx && "bg-grayE"
+                  currentIndex === focusIdx && 'bg-grayE'
                 }`}
                 key={sickData.sickCd}
               >

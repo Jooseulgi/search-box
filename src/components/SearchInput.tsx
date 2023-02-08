@@ -1,5 +1,5 @@
-import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
-import { AiFillCloseCircle, AiOutlineSearch } from "react-icons/ai";
+import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { AiFillCloseCircle, AiOutlineSearch } from 'react-icons/ai';
 
 interface Props {
   searchText: string;
@@ -27,7 +27,7 @@ export default function SearchInput({
         {searchText && (
           <AiFillCloseCircle
             className="absolute top-3 right-14 text-3xl text-grayB"
-            onClick={() => setSearchText("")}
+            onClick={() => setSearchText('')}
           />
         )}
         <AiOutlineSearch className="absolute top-2 right-3 p-2 text-4xl text-white rounded-full bg-blue" />
