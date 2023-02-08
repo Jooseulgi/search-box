@@ -1,5 +1,4 @@
-import React from "react";
-import SearchWrap from "../components/SearchWrap";
+import SearchWrap from '../components/SearchWrap';
 
 function Search() {
   return <SearchWrap />;
