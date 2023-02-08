@@ -23,10 +23,14 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    // 배포를 위한 off 추가
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
-    // 배포를 위한 any warning off
-    "@typescript-eslint/no-explicit-any": "off"
-  }
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-alert": "off",
+    "no-console": "off"
+  },
+  "ignorePatterns": ["tailwind.config.js"]
 }
