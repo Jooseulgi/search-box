@@ -33,17 +33,19 @@ export default function SearchList({
                 key={sickData.sickCd}
               >
                 <AiOutlineSearch className="flex-none text-grayB mr-1" />
-                {sickData.sickNm.split(searchText).map((text, idx) => {
-                  const num = idx + 1;
-                  return sickData.sickNm.split(searchText).length !== num ? (
-                    <span key={num}>
-                      {text}
-                      <strong className="text-blue">{searchText}</strong>
-                    </span>
-                  ) : (
-                    <span key={num}>{text}</span>
-                  );
-                })}
+                <p>
+                  {sickData.sickNm.split(searchText).map((text, idx) => {
+                    const num = idx + 1;
+                    return sickData.sickNm.split(searchText).length !== num ? (
+                      <span key={num}>
+                        {text}
+                        <strong className="text-blue">{searchText}</strong>
+                      </span>
+                    ) : (
+                      <span key={num}>{text}</span>
+                    );
+                  })}
+                </p>
               </li>
             ))
           ) : (
