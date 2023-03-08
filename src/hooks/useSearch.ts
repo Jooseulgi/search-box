@@ -15,7 +15,7 @@ async function getSickResults(input: string, limit?: number) {
       params: { q: input, _limit: limit },
     });
 
-    const successResult = { state: 'success', data: response.data };
+    const successResult = { data: response.data };
 
     cache.set(input, successResult);
 
@@ -25,7 +25,7 @@ async function getSickResults(input: string, limit?: number) {
       alert(`통신에 실패했습니다. 다시 시도해주세요: ${e.message}`);
     }
 
-    const failResult = { state: 'fail', data: [] };
+    const failResult = { data: [] };
 
     return failResult;
   }
