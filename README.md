@@ -30,8 +30,8 @@
 
 - Debounce로 0.5s 후 api를 호출하도록 하여 [api 호출 횟수 최소화](https://github.com/Jooseulgi/search-box/blob/master/src/components/SearchWrap.tsx)
 - 검색어 호출 custom hook을 사용해서 [캐싱 기능 구현](https://github.com/Jooseulgi/search-box/blob/master/src/hooks/useSearch.ts)
-- `getSickResults()` 함수에 사용자가 입력한 input 값이 들어오면 객체에 해당 값이 있는지 확인
-  - input 값과 매치되는 key 값이 있다면 value 값을 리턴
+- `getSickResults()` 함수에 사용자가 입력한 input 값이 들어오면 Map에 해당 값이 있는지 확인
+  - input에 매치되는 key가 있다면 해당 value 값을 리턴
   - 없다면 새로운 key, value 생성
 
 <br/>
